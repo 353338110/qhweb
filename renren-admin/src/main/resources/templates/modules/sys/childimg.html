@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>子列表照片</title>
+		<#include "/header.html">
+</head><script src="${request.contextPath}/statics/libs/ajaxupload.js"></script>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+			<#if shiro.hasPermission("sys:childimg:save")>
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("sys:childimg:update")>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("sys:childimg:delete")>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label">上传图片</div>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" id="upload" placeholder="上传文件"/>
+                </div>
+            </div>
+
+														                    <div class="form-group">
+                        <div class="col-sm-2 control-label">图片url</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.imageUrl" id="imageUrl" placeholder="图片url"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">图片标题</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.iamgeName" placeholder="图片标题"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">图片详情</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.imageDetail" placeholder="图片详情"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">父id</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.parentId" placeholder="父id"/>
+                        </div>
+                    </div>
+											                   <!-- <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.createTime" placeholder=""/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="childImg.updateTime" placeholder=""/>
+                        </div>
+                    </div>-->
+							            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/childimg.js?_${.now?long}"></script>
+</body>
+</html>
