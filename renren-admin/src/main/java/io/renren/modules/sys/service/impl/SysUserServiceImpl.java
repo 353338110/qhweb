@@ -17,6 +17,7 @@ import io.renren.common.utils.Constant;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.modules.sys.dao.SysUserDao;
+import io.renren.modules.sys.entity.ChildImgEntity;
 import io.renren.modules.sys.entity.SysDeptEntity;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.service.SysDeptService;
@@ -54,19 +55,23 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	@Override
 	@DataFilter(subDept = true, user = false)
 	public PageUtils queryPage(Map<String, Object> params) {
-		String username = (String)params.get("username");
+		IPage<SysUserEntity> page = this.page(
+				new Query<SysUserEntity>().getPage(params),
+				new QueryWrapper<SysUserEntity>()
+		);
+		/*String username = (String)params.get("username");
 
 		IPage<SysUserEntity> page = this.page(
 			new Query<SysUserEntity>().getPage(params),
 			new QueryWrapper<SysUserEntity>()
 				.like(StringUtils.isNotBlank(username),"username", username)
 				.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
-		);
+		);*/
 
-		for(SysUserEntity sysUserEntity : page.getRecords()){
+		/*for(SysUserEntity sysUserEntity : page.getRecords()){
 			SysDeptEntity sysDeptEntity = sysDeptService.getById(sysUserEntity.getDeptId());
 			sysUserEntity.setDeptName(sysDeptEntity.getName());
-		}
+		}*/
 
 		return new PageUtils(page);
 	}
@@ -78,7 +83,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		//sha256加密
 		String salt = RandomStringUtils.randomAlphanumeric(20);
 		user.setSalt(salt);
-		user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
+		//user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
 		this.save(user);
 		
 		//保存用户与角色关系

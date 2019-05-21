@@ -20,7 +20,7 @@ import io.renren.common.utils.R;
 
 
 /**
- * 
+ *
  *
  * @author Mark
  * @email sunlightcs@gmail.com
@@ -36,7 +36,7 @@ public class ChildImgController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:childimg:list")
+   // @RequiresPermissions("sys:childimg:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = childImgService.queryPage(params);
 
@@ -48,7 +48,7 @@ public class ChildImgController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("sys:childimg:info")
+   // @RequiresPermissions("sys:childimg:info")
     public R info(@PathVariable("id") String id){
         ChildImgEntity childImg = childImgService.getById(id);
 
@@ -59,7 +59,7 @@ public class ChildImgController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("sys:childimg:save")
+  //  @RequiresPermissions("sys:childimg:save")
     public R save(@RequestBody ChildImgEntity childImg){
         childImgService.save(childImg);
 
@@ -70,11 +70,11 @@ public class ChildImgController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("sys:childimg:update")
+  //  @RequiresPermissions("sys:childimg:update")
     public R update(@RequestBody ChildImgEntity childImg){
         ValidatorUtils.validateEntity(childImg);
         childImgService.updateById(childImg);
-        
+
         return R.ok();
     }
 
@@ -82,11 +82,17 @@ public class ChildImgController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:childimg:delete")
+   // @RequiresPermissions("sys:childimg:delete")
     public R delete(@RequestBody String[] ids){
         childImgService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
 
+    @RequestMapping("/listParentId")
+    // @RequiresPermissions("sys:childimg:list")
+    public R list(int page,int limit,int parentId){
+        PageUtils pageUtils = childImgService.getByParentId(page, limit, parentId);
+        return R.ok().put("page", pageUtils);
+    }
 }

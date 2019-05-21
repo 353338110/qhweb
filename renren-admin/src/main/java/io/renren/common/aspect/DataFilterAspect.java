@@ -50,7 +50,8 @@ public class DataFilterAspect {
 
     @Before("dataFilterCut()")
     public void dataFilter(JoinPoint point) throws Throwable {
-        Object params = point.getArgs()[0];
+        return;
+       /* Object params = point.getArgs()[0];
         if(params != null && params instanceof Map){
             SysUserEntity user = ShiroUtils.getUserEntity();
 
@@ -63,7 +64,7 @@ public class DataFilterAspect {
             return ;
         }
 
-        throw new RRException("数据权限接口，只能是Map类型参数，且不能为NULL");
+        throw new RRException("数据权限接口，只能是Map类型参数，且不能为NULL");*/
     }
 
     /**

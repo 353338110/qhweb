@@ -7,7 +7,7 @@ import io.renren.modules.sys.entity.ChildImgEntity;
 import java.util.Map;
 
 /**
- * 
+ *
  *
  * @author Mark
  * @email sunlightcs@gmail.com
@@ -16,5 +16,6 @@ import java.util.Map;
 public interface ChildImgService extends IService<ChildImgEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+    PageUtils getByParentId(int page,int limit ,int parentId);
 }
 

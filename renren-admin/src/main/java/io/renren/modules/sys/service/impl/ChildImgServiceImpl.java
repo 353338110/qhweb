@@ -1,5 +1,6 @@
 package io.renren.modules.sys.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -20,9 +21,21 @@ public class ChildImgServiceImpl extends ServiceImpl<ChildImgDao, ChildImgEntity
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<ChildImgEntity> page = this.page(
                 new Query<ChildImgEntity>().getPage(params),
-                new QueryWrapper<ChildImgEntity>()
+                new QueryWrapper<ChildImgEntity>().orderByDesc("create_time")
         );
 
+        return new PageUtils(page);
+    }
+
+    @Override
+    public PageUtils getByParentId(int curPage, int limit, int parentId) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("parent_id",parentId);
+        queryWrapper.orderByAsc("create_time");
+        IPage<ChildImgEntity> page = this.page(
+                new Page<>(curPage,limit),
+                queryWrapper
+        );
         return new PageUtils(page);
     }
 

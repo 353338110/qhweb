@@ -36,7 +36,7 @@ public class ProductionController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:production:list")
+   // @RequiresPermissions("sys:production:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = productionService.queryPage(params);
 
@@ -48,7 +48,7 @@ public class ProductionController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("sys:production:info")
+  //  @RequiresPermissions("sys:production:info")
     public R info(@PathVariable("id") String id){
         ProductionEntity production = productionService.getById(id);
 
@@ -59,7 +59,7 @@ public class ProductionController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("sys:production:save")
+   // @RequiresPermissions("sys:production:save")
     public R save(@RequestBody ProductionEntity production){
         productionService.save(production);
 
@@ -70,7 +70,7 @@ public class ProductionController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("sys:production:update")
+   // @RequiresPermissions("sys:production:update")
     public R update(@RequestBody ProductionEntity production){
         ValidatorUtils.validateEntity(production);
         productionService.updateById(production);
@@ -82,7 +82,7 @@ public class ProductionController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:production:delete")
+   // @RequiresPermissions("sys:production:delete")
     public R delete(@RequestBody String[] ids){
         productionService.removeByIds(Arrays.asList(ids));
 

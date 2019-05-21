@@ -36,7 +36,7 @@ public class ParentImgController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:parentimg:list")
+    //@RequiresPermissions("sys:parentimg:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = parentImgService.queryPage(params);
 
@@ -48,7 +48,7 @@ public class ParentImgController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("sys:parentimg:info")
+  //  @RequiresPermissions("sys:parentimg:info")
     public R info(@PathVariable("id") String id){
         ParentImgEntity parentImg = parentImgService.getById(id);
 
@@ -59,7 +59,7 @@ public class ParentImgController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("sys:parentimg:save")
+   // @RequiresPermissions("sys:parentimg:save")
     public R save(@RequestBody ParentImgEntity parentImg){
         parentImgService.save(parentImg);
 
@@ -70,7 +70,7 @@ public class ParentImgController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("sys:parentimg:update")
+   // @RequiresPermissions("sys:parentimg:update")
     public R update(@RequestBody ParentImgEntity parentImg){
         ValidatorUtils.validateEntity(parentImg);
         parentImgService.updateById(parentImg);
@@ -82,7 +82,7 @@ public class ParentImgController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:parentimg:delete")
+  //  @RequiresPermissions("sys:parentimg:delete")
     public R delete(@RequestBody String[] ids){
         parentImgService.removeByIds(Arrays.asList(ids));
 

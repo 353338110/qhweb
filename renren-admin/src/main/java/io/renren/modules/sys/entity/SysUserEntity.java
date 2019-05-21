@@ -49,7 +49,7 @@ public class SysUserEntity implements Serializable {
 	 * 密码
 	 */
 	@NotBlank(message="密码不能为空", groups = AddGroup.class)
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
 	/**
