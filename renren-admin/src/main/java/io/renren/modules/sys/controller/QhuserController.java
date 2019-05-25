@@ -110,13 +110,13 @@ public class QhuserController {
     }
 
     @RequestMapping("/login")
-    public R login(@RequestBody QhuserEntity qhuser) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        if (null!=qhuser.getQhUserName()){
-            QhuserEntity qh_user_name = qhuserService.getOne(new QueryWrapper<QhuserEntity>().eq("qh_user_name", qhuser.getQhUserName()));
+    public R login(String username,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        if (null!=username){
+            QhuserEntity qh_user_name = qhuserService.getOne(new QueryWrapper<QhuserEntity>().eq("qh_user_name", username));
             if (null==qh_user_name){
                 return R.error("账号或者密码错误");
             }
-            if (qh_user_name.getQhUserPassword().equals(encodeByMd5(qhuser.getQhUserPassword()))){
+            if (qh_user_name.getQhUserPassword().equals(encodeByMd5(password))){
                 return R.ok();
             }else {
                 return R.error("账号或者密码错误");
